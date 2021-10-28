@@ -12,9 +12,12 @@
   padding-top: 4rem;
 }
 
-.top-container {
-  display: flex;
-  flex-direction: column;
+.top-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
 }
 
 .main-title {
