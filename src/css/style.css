@@ -3,27 +3,36 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+@font-face {
+  font-family: "brawlface";
+  src: url("Evolved.otf");
+}
 .main-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   padding-top: 4rem;
+  margin: 0px 40px;
 }
 
-.top-container{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
+.left-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
 }
 
 .main-title {
   font-size: 3.5em;
-  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  font-family: brawlface;
+  font-size: 120px;
+  text-transform: uppercase;  
 }
+
 
 .form-container {
   display: flex;
@@ -100,8 +109,22 @@ input.form-control {
   margin-bottom: 1rem;
   cursor: pointer;
 }
+.perso-row:hover {
+  opacity: 0.9;
+}
 
 .perso-item {
   margin: 0;
   padding: 0.5rem 15px;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background-color: #ce5055;
+  border-color: #ce5055;
+}
+.btn-primary:hover {
+  background-color: #ce5055;
+  border-color: #ce5055;
+  opacity: 0.9;
 }
