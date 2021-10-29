@@ -38,7 +38,7 @@ $ALL_PERSOS = $conn->query($getAllPerosRequest);
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
+<body class="body-bg">
     <h1 class="main-title">Ultimate Warrior</h1>
     <div class="main-container">
         <div class="left-container">
@@ -46,27 +46,27 @@ $ALL_PERSOS = $conn->query($getAllPerosRequest);
             <div class="persos-list">
                 <?php
                 foreach ($ALL_PERSOS as $row) {
-                ?>  
-                <div class="perso-container">
-                    <div class="perso-delete" onclick="document.location = './delete_perso.php?id=<?php echo $row['id'];?>'">X</div>
-                    <div class="perso-row" onclick="document.location = './battle.php?id=<?php echo $row['id']; ?>'">
-                        <img src="./images/imagetemp.png" class="perso-icon"/>
-                        <p class="perso-item perso-name">
-                            <?php echo $row['name'] ?>
-                        </p>
-                        <p class="perso-item">
-                            <?php echo $row['type'] ?>
-                        </p>
-                        <p class="perso-item">
-                            pv: <?php echo $row['pv'] ?>
-                        </p>
-                        <p class="perso-item">
-                            force: <?php echo $row['force'] ?>
-                        </p>
-                        <p class="perso-item">
-                            defense: <?php echo $row['defense'] ?>
-                        </p>
-                    </div>
+                ?>
+                    <div class="perso-container">
+                        <div class="perso-delete" onclick="document.location = './delete_perso.php?id=<?php echo $row['id']; ?>'">X</div>
+                        <div class="perso-row" onclick="document.location = './battle.php?id=<?php echo $row['id']; ?>'">
+                            <img src="./images/imagetemp.png" class="perso-icon" />
+                            <p class="perso-item perso-name">
+                                <?php echo $row['name'] ?>
+                            </p>
+                            <p class="perso-item">
+                                <?php echo $row['type'] ?>
+                            </p>
+                            <p class="perso-item">
+                                pv: <?php echo $row['pv'] ?>
+                            </p>
+                            <p class="perso-item">
+                                force: <?php echo $row['force'] ?>
+                            </p>
+                            <p class="perso-item">
+                                defense: <?php echo $row['defense'] ?>
+                            </p>
+                        </div>
                     </div>
                 <?php
                 }

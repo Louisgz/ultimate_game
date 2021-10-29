@@ -1,16 +1,17 @@
 <?php
 
-require ('./Classes/PDOManager.php');
-require ('./Classes/Perso.php');
+require('./Classes/PDOManager.php');
+require('./Classes/Perso.php');
 
 $bdd = PDOManager::getBdd();
 $NAME_PERSO = $_POST['perso'];
 $TYPE_PERSO = $_POST['type'];
 
 $newPerso = Perso::createNewPerso($TYPE_PERSO, $NAME_PERSO);
-
+header("Refresh:1");
 
 
 ?>
-<script> location.replace("/"); </script>
-
+<script>
+  location.replace("/");
+</script>
