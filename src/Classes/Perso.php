@@ -1,5 +1,8 @@
 <?php
 
+require('Magicien.php');
+require('Guerrier.php');
+
 class Perso
 {
     private $pv = 100;
@@ -8,6 +11,7 @@ class Perso
     private $name;
     private $type;
     private $id;
+    private $isSleeping;
 
     public function __construct(array $data = array())
     {
@@ -30,24 +34,33 @@ class Perso
         }
     }
 
-    public function deleteSelectedPerso($id){
+    public function deleteSelectedPerso($id)
+    {
         $bdd = PDOManager::getBdd();
         $destroy = "DELETE FROM `persos` WHERE id=?";
-        $request = $bdd -> prepare($destroy);
-        $request -> execute(array($id));
+        $request = $bdd->prepare($destroy);
+        $request->execute(array($id));
     }
 
     public function attack($persoToAttack)
     {
-        $bdd = PDOManager::getBdd();
-        $newPv = $persoToAttack->getPv() - (
-            $persoToAttack->getDefense() > $this->getForce() ? 0 : $this->getForce() - $persoToAttack->getDefense()
-            );
-        $replacePv = "UPDATE `persos`
+        echo $this->getIsSleeping();
+        if ($persoToAttack && $this->getIsSleeping() !== true) {
+
+            $bdd = PDOManager::getBdd();
+            $newPv = $persoToAttack->getPv() - (
+                $persoToAttack->getDefense() > $this->getForce() ? 0 : $this->getForce() - $persoToAttack->getDefense()
+                );
+            if ($newPv < 0) {
+                $SQL_REQ = "DELETE FROM `persos` WHERE id = '" . $persoToAttack->getId() . "'";
+            } else {
+                $SQL_REQ = "UPDATE `persos`
                         SET pv = " . $newPv . "
                         WHERE id = '" . $persoToAttack->getId() . "'";
-        $request = $bdd->prepare($replacePv);
-        $request->execute();
+            }
+            $request = $bdd->prepare($SQL_REQ);
+            $request->execute();
+        }
     }
 
     public function createNewPerso($type, $name)
@@ -77,7 +90,12 @@ class Perso
         $getPerso = "SELECT * FROM `persos` WHERE id=?";
         $request = $bdd->prepare($getPerso);
         $request->execute(array($id));
-        return new Perso($request->fetch(PDO::FETCH_ASSOC));
+        $persoValues = $request->fetch(PDO::FETCH_ASSOC);
+        if ($persoValues['type'] === 'magicien') {
+            return new Magicien($persoValues);
+        } else {
+            return new Guerrier($persoValues);
+        };
     }
 
     public function getAllPersos($playerId)
@@ -201,6 +219,22 @@ class Perso
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsSleeping()
+    {
+        return $this->isSleeping;
+    }
+
+    /**
+     * @param mixed $isSleeping
+     */
+    public function setIsSleeping($isSleeping)
+    {
+        $this->isSleeping = $isSleeping;
     }
 
 }
