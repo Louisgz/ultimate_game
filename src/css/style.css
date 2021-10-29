@@ -123,6 +123,10 @@ input.form-control {
   height:150px;
   margin: 10px;
 }
+.perso-container{
+  display: flex;
+  flex-direction: column;
+}
 
 .perso-item {
   margin: 0;
@@ -132,6 +136,12 @@ input.form-control {
   font-family: brawlface;
   color: black;
   font-size:40px;
+}
+.perso-delete{
+  background: black;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
 }
 
 /* BUTTONS */

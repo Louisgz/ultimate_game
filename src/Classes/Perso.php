@@ -29,6 +29,13 @@ class Perso
         }
     }
 
+    public function deleteSelectedPerso($id){
+        $bdd = PDOManager::getBdd();
+        $destroy = "DELETE FROM `persos` WHERE id=?";
+        $request = $bdd -> prepare($destroy);
+        $request -> execute(array($id));
+    }
+
     public function attack($persoToAttack)
     {
         $persoToAttack->setPv($persoToAttack->getPv - (
