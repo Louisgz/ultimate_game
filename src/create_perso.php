@@ -8,10 +8,7 @@ $NAME_PERSO = $_POST['perso'];
 $TYPE_PERSO = $_POST['type'];
 
 $newPerso = Perso::createNewPerso($TYPE_PERSO, $NAME_PERSO);
-header("Refresh:1");
 
+header('Location: /index.php');
 
 ?>
-<script>
-  location.replace("/");
-</script>

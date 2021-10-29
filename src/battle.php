@@ -27,23 +27,6 @@ if (isset($_POST['buttonSleep'])) {
     unset($_POST);
 }
 
-<<<<<<< HEAD
-function uniquePost($posted)
-{
-    // take some form values
-    $description = $posted['t_betreff'] . $posted['t_bereich'] . $posted['t_nachricht'];
-    // check if session hash matches current form hash
-    if (isset($_SESSION['form_hash']) && $_SESSION['form_hash'] == md5($description)) {
-        // form was re-submitted return false
-        return false;
-    }
-    // set the session value to prevent re-submit
-    $_SESSION['form_hash'] = md5($description);
-    return true;
-}
-=======
-
->>>>>>> 1c4a560857ee1d69461eb52aa1fec87db5050b22
 ?>
 
 <!doctype html>
@@ -53,10 +36,14 @@ function uniquePost($posted)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Battle</title>
 </head>
 
-<body>
+<body class="body-bg">
+    <div class="battle-main-perso">
+        <img src="./images/<? echo $player->getType() ?>.png" class="perso-image" alt="perso <?php echo $player->getType() ?>" onclick="document.querySelector('#input-type-1').checked = true">
+    </div>
     <div class="battle-persos-container">
         <?php
         foreach ($allPersos as $key => $perso) {
