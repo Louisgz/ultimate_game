@@ -2,35 +2,44 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
 
+}
+@font-face {
+  font-family: "brawlface";
+  src: url("Evolved.otf");
+}
 .main-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  align-items: start;
+  flex-direction: row;
   padding-top: 4rem;
 }
 
-.top-container{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
+.left-container {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  max-width: 1000px;
+  text-align: center;
 }
 
 .main-title {
   font-size: 3.5em;
-  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  font-family: brawlface;
+  font-size: 120px;
+  text-transform: uppercase;  
+  text-shadow: 3px 3px 6px #772C2C;
 }
+
 
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 60vw;
   margin-top: 3rem;
+  margin: 0px auto;
 }
 
 .images-container {
@@ -86,22 +95,52 @@ input.form-control {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 1000px;
 }
 
 .perso-row {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
-  width: 100%;
+  width: 250px;
   background: #ce5055;
   border-radius: 7px;
   color: white;
   margin-bottom: 1rem;
   cursor: pointer;
+  margin-left: 10px;
+  box-shadow: 7px 8px 10px grey;
+  height: 360px;
+}
+.perso-row:hover {
+  opacity: 0.9;
+}
+.perso-icon{
+  width:150px;
+  height:150px;
+  margin: 10px;
 }
 
 .perso-item {
   margin: 0;
-  padding: 0.5rem 15px;
+  padding: 0px 0px;
+}
+.perso-name{
+  font-family: brawlface;
+  color: black;
+  font-size:40px;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background-color: #ce5055;
+  border-color: #ce5055;
+}
+.btn-primary:hover {
+  background-color: #ce5055;
+  border-color: #ce5055;
+  opacity: 0.9;
 }
