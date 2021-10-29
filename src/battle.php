@@ -70,9 +70,13 @@ if (isset($_POST['buttonSleep'])) {
                             <button type="post" name="buttonAttack" value="<?php echo $key ?>">
                                 Attaquer
                             </button>
-                            <button type="post" name="buttonSleep" value="<?php echo $key ?>">
-                                Endormir
-                            </button>
+                            <?php
+                            if ($player->gettype() === 'magicien') { ?>
+                                <button type="post" name="buttonSleep" value="<?php echo $key ?>">
+                                    Endormir
+                                </button>
+                            <?php } ?>
+
                         </form>
                     </div>
                 </div>

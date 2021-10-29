@@ -11,7 +11,7 @@ class Perso
     private $name;
     private $type;
     private $id;
-    private $isSleeping;
+    private $isSleeping = false;
 
     public function __construct(array $data = array())
     {
@@ -48,9 +48,7 @@ class Perso
         if ($persoToAttack && $this->getIsSleeping() !== true) {
 
             $bdd = PDOManager::getBdd();
-            $newPv = $persoToAttack->getPv() - (
-                $persoToAttack->getDefense() > $this->getForce() ? 0 : $this->getForce() - $persoToAttack->getDefense()
-                );
+            $newPv = $persoToAttack->getPv() - ($persoToAttack->getDefense() > $this->getForce() ? 0 : $this->getForce() - $persoToAttack->getDefense());
             if ($newPv < 0) {
                 $SQL_REQ = "DELETE FROM `persos` WHERE id = '" . $persoToAttack->getId() . "'";
             } else {
@@ -235,5 +233,4 @@ class Perso
     {
         $this->isSleeping = $isSleeping;
     }
-
 }
