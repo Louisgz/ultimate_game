@@ -17,25 +17,17 @@ $allPersos = Perso::getAllPersos($id);
 
 if (isset($_POST['buttonAttack'])) {
     $player->attack($allPersos[$_POST['buttonAttack']]);
-    header("Refresh:0");
     unset($_POST);
+    header("Refresh:0");
 }
 if (isset($_POST['buttonSleep'])) {
+    if ($player->getType() === 'magicien') {
+        $player->sleep($allPersos[$_POST['buttonSleep']]);
+    }
     unset($_POST);
 }
 
-function uniquePost($posted) {
-    // take some form values
-    $description = $posted['t_betreff'].$posted['t_bereich'].$posted['t_nachricht'];
-    // check if session hash matches current form hash
-    if (isset($_SESSION['form_hash']) && $_SESSION['form_hash'] == md5($description) ) {
-        // form was re-submitted return false
-        return false;
-    }
-    // set the session value to prevent re-submit
-    $_SESSION['form_hash'] = md5($description);
-    return true;
-}
+
 ?>
 
 <!doctype html>
