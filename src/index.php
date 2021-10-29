@@ -13,7 +13,8 @@ $sql = "CREATE TABLE IF NOT EXISTS persos(
     `id` VARCHAR(100),
     `defense` INT,
     `pv` INT,
-    `force` INT
+    `force` INT,
+    wakeDate INT
 );";
 
 $conn->query($sql);
