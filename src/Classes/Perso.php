@@ -11,7 +11,7 @@ class Perso
     private $name;
     private $type;
     private $id;
-    private $isSleeping = false;
+    private $isSleeping;
 
     public function __construct(array $data = array())
     {
