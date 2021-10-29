@@ -47,15 +47,10 @@ $ALL_PERSOS = $conn->query($getAllPerosRequest);
             <div class="persos-list">
                 <?php
                 foreach ($ALL_PERSOS as $row) {
-<<<<<<< HEAD
-                ?>
-                    <div class="perso-row" onclick="document.location = './battle.php?id=<?php echo $row['id']; ?>'">
-=======
                 ?>  
                 <div class="perso-container">
                     <div class="perso-delete" onclick="document.location = './delete_perso.php?id=<?php echo $row['id'];?>'">X</div>
                     <div class="perso-row" onclick="document.location = './attack.php?id=<?php echo $row['id']; ?>'">
->>>>>>> db1e1d350469a1cbcf034f085bef8ecc8c7d7e85
                         <img src="./images/imagetemp.png" class="perso-icon"/>
                         <p class="perso-item perso-name">
                             <?php echo $row['name'] ?>
