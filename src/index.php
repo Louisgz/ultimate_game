@@ -48,7 +48,7 @@ $ALL_PERSOS = $conn->query($getAllPerosRequest);
                 <?php
                 foreach ($ALL_PERSOS as $row) {
                 ?>
-                    <div class="perso-row" onclick="document.location = './attack.php?id=<?php echo $row['id']; ?>'">
+                    <div class="perso-row" onclick="document.location = './battle.php?id=<?php echo $row['id']; ?>'">
                         <img src="./images/imagetemp.png" class="perso-icon"/>
                         <p class="perso-item perso-name">
                             <?php echo $row['name'] ?>
