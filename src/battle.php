@@ -17,13 +17,17 @@ $allPersos = Perso::getAllPersos($id);
 
 if (isset($_POST['buttonAttack'])) {
     $player->attack($allPersos[$_POST['buttonAttack']]);
-    header("Refresh:0");
     unset($_POST);
+    header("Refresh:0");
 }
 if (isset($_POST['buttonSleep'])) {
+    if ($player->getType() === 'magicien') {
+        $player->sleep($allPersos[$_POST['buttonSleep']]);
+    }
     unset($_POST);
 }
 
+<<<<<<< HEAD
 function uniquePost($posted)
 {
     // take some form values
@@ -37,6 +41,9 @@ function uniquePost($posted)
     $_SESSION['form_hash'] = md5($description);
     return true;
 }
+=======
+
+>>>>>>> 1c4a560857ee1d69461eb52aa1fec87db5050b22
 ?>
 
 <!doctype html>

@@ -1,5 +1,5 @@
-<?php
 
+<<<<<<< HEAD
 require('./Classes/Perso.php');
 
 $persoToAttack = $_GET['persoToAttack'];
@@ -45,3 +45,5 @@ if ($remainingSeconds < 1) {
 <script>
     // document.location = 'battle.php?id=<?php echo $persoWhoAttack ?>'
 </script>
+=======
+>>>>>>> 1c4a560857ee1d69461eb52aa1fec87db5050b22
