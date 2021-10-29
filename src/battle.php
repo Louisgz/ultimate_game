@@ -22,7 +22,7 @@ if (isset($_POST['buttonAttack'])) {
 }
 if (isset($_POST['buttonSleep'])) {
     if ($player->getType() === 'magicien') {
-        $player->sleep($allPersos[$_POST['buttonSleep']]);
+        $player->makeSleep($allPersos[$_POST['buttonSleep']]);
     }
     unset($_POST);
 }
@@ -49,7 +49,7 @@ if (isset($_POST['buttonSleep'])) {
     </a></button>
 <div class="battle-main-perso">
     <img src="./images/<? echo $player->getType(); ?>.png" class="battle-player-image"
-         alt="perso <?php echo $player->getType() ?>" >
+         alt="perso <?php echo $player->getType() ?>">
     <h3 class="battle-player-title"><?php echo $player->getName(); ?></h3>
     <p class="battle-player-att">
         <img src="./images/icons/heart.png" class="att-icons"></img>
@@ -72,7 +72,7 @@ if (isset($_POST['buttonSleep'])) {
             <div class="battle-perso-row">
                 <div class="battle-perso-image-container">
                     <img src="./images/<? echo $perso->getType(); ?>.png" class="battle-perso-image"
-                         alt="perso <?php echo $perso->getType() ?>" >
+                         alt="perso <?php echo $perso->getType() ?>">
                 </div>
                 <div class="battle-perso-stats">
                     <div class="battle-perso-title">
@@ -93,10 +93,12 @@ if (isset($_POST['buttonSleep'])) {
                     <div class="battle-perso-element">
                         <div class="battle-perso-buttons">
                             <form method="post">
-                                <button class="battle-perso-button1" type="post" name="buttonAttack" value="<?php echo $key ?>">
+                                <button class="battle-perso-button1" type="post" name="buttonAttack"
+                                        value="<?php echo $key ?>">
                                     Attaquer
                                 </button>
-                                <button class="battle-perso-button2" type="post" name="buttonSleep" value="<?php echo $key ?>">
+                                <button class="battle-perso-button2" type="post" name="buttonSleep"
+                                        value="<?php echo $key ?>">
                                     Endormir
                                 </button>
                             </form>
@@ -108,7 +110,7 @@ if (isset($_POST['buttonSleep'])) {
         }
     }
 
-    if(count($allPersos) === 1){
+    if (count($allPersos) === 1) {
         echo '<p class="text-win">
         <img src="./images/winner.png"/>
                 Tous les personnages ont été vaincus, vous avez gagné !

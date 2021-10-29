@@ -12,6 +12,12 @@ class Perso
     private $type;
     private $id;
     private $isSleeping;
+    private $wakeDate;
+
+    public function setWakeDate($wakeDate)
+    {
+        $this->wakeDate = $wakeDate;
+    }
 
     public function __construct(array $data = array())
     {
@@ -44,8 +50,8 @@ class Perso
 
     public function attack($persoToAttack)
     {
-        echo $this->getIsSleeping();
-        if ($persoToAttack && $this->getIsSleeping() !== true) {
+
+        if ($persoToAttack && $this->getWakeDate() < time()) {
 
             $bdd = PDOManager::getBdd();
             $newPv = $persoToAttack->getPv() - (
@@ -63,6 +69,16 @@ class Perso
         }
     }
 
+    public function fallAsleep()
+    {
+        $now = time();
+        $dateWakeUp = $now + 15;
+        $bdd = PDOManager::getBdd();
+        $updateSleep = "UPDATE `persos` SET wakeDate=" . $dateWakeUp . " where id = '" . $this->getId(). "'";
+        $request = $bdd->prepare($updateSleep);
+        $request->execute();
+    }
+
     public function createNewPerso($type, $name)
     {
         $VIE_PERSO = 100;
@@ -71,7 +87,7 @@ class Perso
         $ID_PERSO = uniqid();
         $bdd = PDOManager::getBdd();
 
-        $insert = "INSERT INTO persos (`type`, `name`, `force`, `pv`, `defense`, `id`) VALUES (:type, :name, :force, :pv, :defense, :id)";
+        $insert = "INSERT INTO persos (`type`, `name`, `force`, `pv`, `defense`, `id`, `wakeDate`) VALUES (:type, :name, :force, :pv, :defense, :id, :wakeDate)";
         $request = $bdd->prepare($insert);
         $request->execute(array(
             'type' => $type,
@@ -79,7 +95,8 @@ class Perso
             'force' => $FORCE_PERSO,
             'pv' => $VIE_PERSO,
             'defense' => $DEFENSE_PERSO,
-            'id' => $ID_PERSO
+            'id' => $ID_PERSO,
+            'wakeDate' => time()
         ));
     }
 
@@ -235,5 +252,17 @@ class Perso
     {
         $this->isSleeping = $isSleeping;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getWakeDate()
+    {
+        return $this->wakeDate;
+    }
+
+    /**
+     * @param mixed $wakeDate
+     */
 
 }
