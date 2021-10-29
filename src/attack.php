@@ -1,18 +1,14 @@
 <?php
 
-require('./Classes/PDOManager.php');
-// Create connection
-$bdd = PDOManager::getBdd();
-// Check connection
-if ($bdd->connect_error) {
-    die("Connection failed: " . $bdd->connect_error);
-    echo 'err';
-};
-$id = $_GET['id'];
+require('./Classes/Perso.php');
 
-$getPerso = "SELECT * FROM `persos` WHERE id=?";
+$persoToAttack = $_GET['persoToAttack'];
+$persoWhoAttack = $_GET['persoWhoAttack'];
 
-$request = $bdd->prepare($getPerso);
-$request->execute(array($id));
+Perso
 
-echo var_dump($request->fetch(PDO::FETCH_ASSOC));
+?>
+
+<script>
+    // document.location = 'battle.php?id=<?php echo $persoWhoAttack ?>'
+</script>

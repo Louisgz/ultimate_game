@@ -5,7 +5,8 @@ class Perso
     private $pv = 100;
     private $force;
     private $defense;
-    private $attack;
+    private $name;
+    private $type;
     private $id;
 
     public function __construct(array $data = array())
@@ -38,13 +39,19 @@ class Perso
 
     public function attack($persoToAttack)
     {
-        $persoToAttack->setPv($persoToAttack->getPv - (
-            $persoToAttack->getDefense() > $this->getAttack() ? 0 : $persoToAttack->getDefense() - $this->getAttack()
-            )
-        );
+        $bdd = PDOManager::getBdd();
+        $newPv = $persoToAttack->getPv() - (
+            $persoToAttack->getDefense() > $this->getForce() ? 0 : $this->getForce() - $persoToAttack->getDefense()
+            );
+        $replacePv = "UPDATE `persos`
+                        SET pv = " . $newPv . "
+                        WHERE id = '" . $persoToAttack->getId() . "'";
+        $request = $bdd->prepare($replacePv);
+        $request->execute();
     }
 
-    public function createNewPerso($type, $name){
+    public function createNewPerso($type, $name)
+    {
         echo 'test';
         $VIE_PERSO = 100;
         $FORCE_PERSO = self::getRandomForce($type);
@@ -55,27 +62,47 @@ class Perso
         $insert = "INSERT INTO persos (`type`, `name`, `force`, `pv`, `defense`, `id`) VALUES (:type, :name, :force, :pv, :defense, :id)";
         $request = $bdd->prepare($insert);
         $request->execute(array(
-            'type'=> $type,
-            'name'=> $name,
-            'force'=> $FORCE_PERSO,
-            'pv'=> $VIE_PERSO,
-            'defense'=> $DEFENSE_PERSO,
-            'id'=> $ID_PERSO
+            'type' => $type,
+            'name' => $name,
+            'force' => $FORCE_PERSO,
+            'pv' => $VIE_PERSO,
+            'defense' => $DEFENSE_PERSO,
+            'id' => $ID_PERSO
         ));
     }
 
-    private function getRandomForce($type) {
-        if($type === 'magicien'){
+    public function getSinglePerso($id)
+    {
+        $bdd = PDOManager::getBdd();
+        $getPerso = "SELECT * FROM `persos` WHERE id=?";
+        $request = $bdd->prepare($getPerso);
+        $request->execute(array($id));
+        return new Perso($request->fetch(PDO::FETCH_ASSOC));
+    }
+
+    public function getAllPersos($playerId)
+    {
+        $bdd = PDOManager::getBdd();
+        $getAllPersosQuery = "SELECT * FROM `persos`";
+        $request = $bdd->query($getAllPersosQuery);
+        $request->setFetchMode(PDO::FETCH_CLASS, 'Perso');
+        return $request->fetchAll();
+    }
+
+    private function getRandomForce($type)
+    {
+        if ($type === 'magicien') {
             return rand(0, 10);
-        } else{
+        } else {
             return rand(20, 40);
         }
     }
 
-    private function getRandomDefense($type) {
-        if($type === 'magicien'){
+    private function getRandomDefense($type)
+    {
+        if ($type === 'magicien') {
             return 0;
-        } else{
+        } else {
             return rand(10, 19);
         }
     }
@@ -131,22 +158,6 @@ class Perso
     /**
      * @return mixed
      */
-    public function getAttack()
-    {
-        return $this->attack;
-    }
-
-    /**
-     * @param mixed $attack
-     */
-    public function setAttack($attack)
-    {
-        $this->attack = $attack;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
@@ -159,4 +170,37 @@ class Perso
     {
         $this->id = $id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
 }
