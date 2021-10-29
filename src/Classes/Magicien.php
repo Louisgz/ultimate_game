@@ -16,7 +16,6 @@ class Magicien extends Perso
         $timeSince = $now - $_SESSION['time_started'];
         $remainingSeconds = $_SESSION['countdown'] - $timeSince;
 
-
         if (!isset($_SESSION['countdown']) || $remainingSeconds <= 0) {
             $_SESSION['countdown'] = 5;
             $_SESSION['time_started'] = time();
@@ -39,6 +38,4 @@ class Magicien extends Perso
     {
         $this->gotManaDate = $gotManaDate;
     }
-
-
 }

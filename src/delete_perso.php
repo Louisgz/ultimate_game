@@ -6,5 +6,7 @@
   // $destroy = "DELETE FROM `persos` WHERE id=?";
   $id = $_GET['id'];
   $killPerso = Perso::deleteSelectedPerso($id);
-  ?>
-<script> location.replace("/"); </script>
+
+  header('Location: /index.php');
+
+?>

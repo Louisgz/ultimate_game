@@ -65,7 +65,6 @@ class Perso
 
     public function createNewPerso($type, $name)
     {
-        echo 'test';
         $VIE_PERSO = 100;
         $FORCE_PERSO = self::getRandomForce($type);
         $DEFENSE_PERSO = self::getRandomDefense($type);

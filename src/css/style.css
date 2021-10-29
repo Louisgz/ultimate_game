@@ -54,6 +54,7 @@
   font-size: 30px;
   text-align: center;
   margin-bottom: 2rem;
+  color: white;
 }
 
 .select-perso {
@@ -152,6 +153,10 @@ input.form-control {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.form-check-label{
+  color: white;
 }
 
 /* BUTTONS */
