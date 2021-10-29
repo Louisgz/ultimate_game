@@ -47,7 +47,9 @@ $ALL_PERSOS = $conn->query($getAllPerosRequest);
             <div class="persos-list">
                 <?php
                 foreach ($ALL_PERSOS as $row) {
-                ?>
+                ?>  
+                <div class="perso-container">
+                    <div class="perso-delete" onclick="document.location = './delete_perso.php?id=<?php echo $row['id'];?>'">X</div>
                     <div class="perso-row" onclick="document.location = './attack.php?id=<?php echo $row['id']; ?>'">
                         <img src="./images/imagetemp.png" class="perso-icon"/>
                         <p class="perso-item perso-name">
@@ -65,6 +67,7 @@ $ALL_PERSOS = $conn->query($getAllPerosRequest);
                         <p class="perso-item">
                             defense: <?php echo $row['defense'] ?>
                         </p>
+                    </div>
                     </div>
                 <?php
                 }
